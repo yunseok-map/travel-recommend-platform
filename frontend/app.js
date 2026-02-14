@@ -411,12 +411,39 @@ async function showDetail(destId) {
                                     <span style="background: white; padding: 4px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">${spot.category}</span>
                                 </div>
                                 <div style="color: var(--text-gray); font-size: 14px; margin-bottom: 8px;">${spot.description || ''}</div>
-                                ${spot.parking ? '<div style="font-size: 13px; color: var(--success); margin-bottom: 4px;">🚗 주차 가능</div>' : ''}
-                                ${spot.tip ? `<div style="font-size: 13px; color: var(--text-gray);">💡 ${spot.tip}</div>` : ''}
+                                ${spot.category === '맛집' ? `
+                                    <div style="background: white; padding: 12px; border-radius: 8px; margin-top: 12px; border-left: 3px solid var(--primary);">
+                                        ${spot.menu ? `<div style="font-size: 14px; margin-bottom: 4px;">🍽️ <strong>${spot.menu}</strong></div>` : ''}
+                                        ${spot.price ? `<div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">💰 ${spot.price}</div>` : ''}
+                                        ${spot.hours ? `<div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">🕐 ${spot.hours}</div>` : ''}
+                                        ${spot.reservation ? `<div style="font-size: 13px; color: var(--text-gray); margin-bottom: 4px;">📞 ${spot.reservation}</div>` : ''}
+                                        ${spot.waiting ? `<div style="font-size: 13px; color: var(--warning);">⏰ ${spot.waiting}</div>` : ''}
+                                    </div>
+                                ` : ''}
+                                ${spot.parking ? '<div style="font-size: 13px; color: var(--success); margin-top: 8px;">🚗 주차 가능</div>' : ''}
+                                ${spot.tip ? `<div style="font-size: 13px; color: var(--text-gray); margin-top: 4px;">💡 ${spot.tip}</div>` : ''}
                             </div>
                         </div>
                     `).join('')}
                 </div>
+                
+                ${destination.restaurants && destination.restaurants.length > 0 ? `
+                <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">🍽️ 추천 맛집 상세</h3>
+                <div style="display: grid; gap: 16px; margin-bottom: 32px;">
+                    ${destination.restaurants.map(restaurant => `
+                        <div style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(245, 158, 11, 0.05)); padding: 24px; border-radius: 12px; border-left: 4px solid var(--warning);">
+                            <div style="font-size: 20px; font-weight: 700; margin-bottom: 12px;">${restaurant.name}</div>
+                            <div style="display: grid; gap: 8px;">
+                                ${restaurant.specialty ? `<div style="font-size: 14px;"><strong>🏆 특선:</strong> ${restaurant.specialty}</div>` : ''}
+                                ${restaurant.mustTry ? `<div style="font-size: 14px;"><strong>✨ 추천 메뉴:</strong> ${restaurant.mustTry}</div>` : ''}
+                                ${restaurant.priceRange ? `<div style="font-size: 14px;"><strong>💰 가격대:</strong> ${restaurant.priceRange}</div>` : ''}
+                                ${restaurant.address ? `<div style="font-size: 13px; color: var(--text-gray);"><strong>📍 주소:</strong> ${restaurant.address}</div>` : ''}
+                                ${restaurant.reservationTip ? `<div style="font-size: 13px; background: white; padding: 8px; border-radius: 6px; margin-top: 8px;"><strong>💡 팁:</strong> ${restaurant.reservationTip}</div>` : ''}
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
                 
                 <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">💡 여행 팁</h3>
                 <div style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05)); padding: 20px; border-radius: 12px; border-left: 4px solid var(--primary);">
