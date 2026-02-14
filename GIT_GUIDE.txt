@@ -1,0 +1,29 @@
+# Git 커밋 가이드
+
+## 초기 설정
+
+1. Git 초기화
+   git init
+
+2. 파일 추가
+   git add .
+
+3. 첫 커밋
+   git commit -m "Initial commit: 여행 추천 플랫폼"
+
+4. GitHub 저장소 연결 (GitHub에서 저장소 생성 후)
+   git remote add origin https://github.com/your-username/travel-recommendation-platform.git
+   git branch -M main
+   git push -u origin main
+
+## 이후 수정사항 커밋
+
+git add .
+git commit -m "feat: 새로운 기능 추가"
+git push
+
+## 확인 명령어
+
+git status          # 변경사항 확인
+git log --oneline   # 커밋 히스토리
+git remote -v       # 원격 저장소 확인

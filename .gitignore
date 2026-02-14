@@ -1,0 +1,28 @@
+# 환경 변수 (API 키 포함)
+.env
+_env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.Python
+env/
+venv/
+ENV/
+
+# 백업 폴더
+backend/백업본/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 로그
+*.log

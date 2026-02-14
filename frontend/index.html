@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>여행 추천 플랫폼 | 나만의 여행지 찾기</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">✈️</span>
+                <span class="logo-text">TravelMate</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="main">
+        
+        <!-- 히어로 섹션 (초기 화면) -->
+        <section id="hero-section" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    당신만을 위한<br>
+                    <span class="gradient-text">완벽한 여행지</span>를 찾아드려요
+                </h1>
+                <p class="hero-subtitle">
+                    여행 스타일에 맞는 키워드를 선택하면<br>
+                    AI가 가장 적합한 여행지를 추천해드립니다
+                </p>
+                <button class="hero-button" onclick="startSelection()">
+                    <span>여행 시작하기</span>
+                    <span class="button-icon">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 키워드 선택 섹션 -->
+        <section id="selection-section" class="selection-section hidden">
+            <div class="container">
+                
+                <!-- 진행률 표시 -->
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="0">
+                        <div class="step-circle">1</div>
+                        <span class="step-label">지역</span>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" data-step="1">
+                        <div class="step-circle">2</div>
+                        <span class="step-label">스타일</span>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-circle">3</div>
+                        <span class="step-label">동행</span>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-circle">4</div>
+                        <span class="step-label">테마</span>
+                    </div>
+                    <div class="progress-line"></div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-circle">5</div>
+                        <span class="step-label">옵션</span>
+                    </div>
+                </div>
+
+                <!-- Step 0: 지역 선택 -->
+                <div class="step-content active" data-step="0">
+                    <h2 class="step-title">어느 지역으로 떠나고 싶으세요?</h2>
+                    <p class="step-description">선택하지 않으면 전국 모든 지역에서 추천해드려요</p>
+                    
+                    <div class="option-grid region-grid">
+                        <button class="option-card region-card" data-value="전체">
+                            <div class="option-icon">🗺️</div>
+                            <div class="option-label">전체</div>
+                            <div class="option-desc">어디든 좋아요</div>
+                        </button>
+                        <button class="option-card region-card" data-value="경기">
+                            <div class="option-icon">🏙️</div>
+                            <div class="option-label">경기</div>
+                            <div class="option-desc">수도권 근교</div>
+                        </button>
+                        <button class="option-card region-card" data-value="강원">
+                            <div class="option-icon">🏔️</div>
+                            <div class="option-label">강원</div>
+                            <div class="option-desc">산과 바다</div>
+                        </button>
+                        <button class="option-card region-card" data-value="충청">
+                            <div class="option-icon">🌾</div>
+                            <div class="option-label">충청</div>
+                            <div class="option-desc">내륙 여행</div>
+                        </button>
+                        <button class="option-card region-card" data-value="전라">
+                            <div class="option-icon">🍚</div>
+                            <div class="option-label">전라</div>
+                            <div class="option-desc">미식 여행</div>
+                        </button>
+                        <button class="option-card region-card" data-value="경상">
+                            <div class="option-icon">🏛️</div>
+                            <div class="option-label">경상</div>
+                            <div class="option-desc">역사와 문화</div>
+                        </button>
+                        <button class="option-card region-card" data-value="부산">
+                            <div class="option-icon">🌊</div>
+                            <div class="option-label">부산</div>
+                            <div class="option-desc">도시 + 해변</div>
+                        </button>
+                        <button class="option-card region-card" data-value="제주">
+                            <div class="option-icon">🏝️</div>
+                            <div class="option-label">제주</div>
+                            <div class="option-desc">섬 여행</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 1: 여행 스타일 -->
+                <div class="step-content" data-step="1">
+                    <h2 class="step-title">여행 스타일을 선택해주세요</h2>
+                    <p class="step-description">당신의 여행 스타일은 무엇인가요?</p>
+                    
+                    <div class="option-grid style-grid">
+                        <button class="option-card large-card" data-category="여행_스타일" data-value="계획형">
+                            <div class="option-icon">📋</div>
+                            <div class="option-label">계획형 (J)</div>
+                            <div class="option-desc">일정표를 미리 짜고 예약해요</div>
+                        </button>
+                        <button class="option-card large-card" data-category="여행_스타일" data-value="즉흥형">
+                            <div class="option-icon">🎲</div>
+                            <div class="option-label">즉흥형 (P)</div>
+                            <div class="option-desc">그때그때 기분 따라 움직여요</div>
+                        </button>
+                        <button class="option-card large-card" data-category="여행_스타일" data-value="중간형">
+                            <div class="option-icon">⚖️</div>
+                            <div class="option-label">중간형</div>
+                            <div class="option-desc">큰 틀만 계획하고 유연하게</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: 동행 -->
+                <div class="step-content" data-step="2">
+                    <h2 class="step-title">누구와 함께 떠나나요?</h2>
+                    <p class="step-description">동행자에 따라 추천이 달라져요</p>
+                    
+                    <div class="option-grid">
+                        <button class="option-card" data-category="동행" data-value="솔로">
+                            <div class="option-icon">🧘</div>
+                            <div class="option-label">솔로</div>
+                            <div class="option-desc">나만의 시간</div>
+                        </button>
+                        <button class="option-card" data-category="동행" data-value="친구">
+                            <div class="option-icon">👯</div>
+                            <div class="option-label">친구</div>
+                            <div class="option-desc">20-30대 또래</div>
+                        </button>
+                        <button class="option-card" data-category="동행" data-value="커플">
+                            <div class="option-icon">💑</div>
+                            <div class="option-label">커플</div>
+                            <div class="option-desc">로맨틱하게</div>
+                        </button>
+                        <button class="option-card" data-category="동행" data-value="가족">
+                            <div class="option-icon">👨‍👩‍👧‍👦</div>
+                            <div class="option-label">가족</div>
+                            <div class="option-desc">부모님/아이와</div>
+                        </button>
+                        <button class="option-card" data-category="동행" data-value="단체">
+                            <div class="option-icon">👥</div>
+                            <div class="option-label">단체</div>
+                            <div class="option-desc">동호회/워크샵</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3: 테마 -->
+                <div class="step-content" data-step="3">
+                    <h2 class="step-title">어떤 여행을 원하세요?</h2>
+                    <p class="step-description">최대 3개까지 선택 가능해요</p>
+                    
+                    <div class="option-grid theme-grid">
+                        <button class="option-card multi-select" data-category="테마" data-value="맛집">
+                            <div class="option-icon">🍽️</div>
+                            <div class="option-label">맛집</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="카페">
+                            <div class="option-icon">☕</div>
+                            <div class="option-label">카페</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="로컬">
+                            <div class="option-icon">🏘️</div>
+                            <div class="option-label">로컬</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="감성">
+                            <div class="option-icon">📸</div>
+                            <div class="option-label">감성</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="액티비티">
+                            <div class="option-icon">🏃</div>
+                            <div class="option-label">액티비티</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="휴양">
+                            <div class="option-icon">🏖️</div>
+                            <div class="option-label">휴양</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="문화예술">
+                            <div class="option-icon">🎭</div>
+                            <div class="option-label">문화예술</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="쇼핑">
+                            <div class="option-icon">🛍️</div>
+                            <div class="option-label">쇼핑</div>
+                        </button>
+                        <button class="option-card multi-select" data-category="테마" data-value="자연">
+                            <div class="option-icon">🌿</div>
+                            <div class="option-label">자연</div>
+                        </button>
+                    </div>
+                    <div class="theme-counter">
+                        <span id="theme-count">0</span>/3 선택
+                    </div>
+                </div>
+
+                <!-- Step 4: 세부 옵션 -->
+                <div class="step-content" data-step="4">
+                    <h2 class="step-title">마지막 옵션을 선택해주세요</h2>
+                    <p class="step-description">거의 다 왔어요!</p>
+                    
+                    <div class="option-section">
+                        <h3 class="section-subtitle">여행 페이스</h3>
+                        <div class="option-grid">
+                            <button class="option-card" data-category="페이스" data-value="여유">
+                                <div class="option-icon">🐌</div>
+                                <div class="option-label">여유롭게</div>
+                                <div class="option-desc">하루 2-3곳</div>
+                            </button>
+                            <button class="option-card" data-category="페이스" data-value="적당">
+                                <div class="option-icon">🚶</div>
+                                <div class="option-label">적당히</div>
+                                <div class="option-desc">하루 4-5곳</div>
+                            </button>
+                            <button class="option-card" data-category="페이스" data-value="빡빡">
+                                <div class="option-icon">🏃</div>
+                                <div class="option-label">빡빡하게</div>
+                                <div class="option-desc">하루 6곳 이상</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="option-section">
+                        <h3 class="section-subtitle">교통수단</h3>
+                        <div class="option-grid">
+                            <button class="option-card" data-category="교통" data-value="대중교통">
+                                <div class="option-icon">🚇</div>
+                                <div class="option-label">대중교통</div>
+                            </button>
+                            <button class="option-card" data-category="교통" data-value="자차">
+                                <div class="option-icon">🚗</div>
+                                <div class="option-label">자차</div>
+                            </button>
+                            <button class="option-card" data-category="교통" data-value="도보">
+                                <div class="option-icon">🚶</div>
+                                <div class="option-label">도보</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="option-section">
+                        <h3 class="section-subtitle">분위기 (최대 2개)</h3>
+                        <div class="option-grid">
+                            <button class="option-card multi-select" data-category="분위기" data-value="핫플">
+                                <div class="option-icon">🔥</div>
+                                <div class="option-label">핫플</div>
+                            </button>
+                            <button class="option-card multi-select" data-category="분위기" data-value="한적">
+                                <div class="option-icon">🌾</div>
+                                <div class="option-label">한적</div>
+                            </button>
+                            <button class="option-card multi-select" data-category="분위기" data-value="이색">
+                                <div class="option-icon">✨</div>
+                                <div class="option-label">이색</div>
+                            </button>
+                            <button class="option-card multi-select" data-category="분위기" data-value="전통">
+                                <div class="option-icon">🏯</div>
+                                <div class="option-label">전통</div>
+                            </button>
+                            <button class="option-card multi-select" data-category="분위기" data-value="트렌디">
+                                <div class="option-icon">🎨</div>
+                                <div class="option-label">트렌디</div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 네비게이션 버튼 -->
+                <div class="nav-buttons">
+                    <button class="nav-btn btn-prev" onclick="prevStep()" disabled>
+                        <span>← 이전</span>
+                    </button>
+                    <button class="nav-btn btn-next" onclick="nextStep()">
+                        <span>다음 →</span>
+                    </button>
+                    <button class="nav-btn btn-submit hidden" onclick="submitKeywords()">
+                        <span>추천받기 ✨</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 결과 섹션 -->
+        <section id="results-section" class="results-section hidden">
+            <div class="container">
+                
+                <!-- 결과 헤더 -->
+                <div class="results-header">
+                    <div style="display: flex; gap: 12px; justify-content: center; margin-bottom: 20px;">
+                        <button class="back-button" onclick="goBack()">← 다시 선택하기</button>
+                        <button class="back-button" onclick="resetAll()" style="background: var(--primary); color: white;">↻ 처음부터 다시</button>
+                    </div>
+                    <h2 class="results-title">당신을 위한 추천 여행지</h2>
+                </div>
+
+                <!-- 선택된 키워드 표시 -->
+                <div class="selected-keywords" id="selected-keywords">
+                    <!-- JS로 동적 생성 -->
+                </div>
+
+                <!-- 결과 리스트 -->
+                <div class="results-list" id="results-list">
+                    <!-- JS로 동적 생성 -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 상세 모달 -->
+        <div id="detail-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="closeModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeModal()">✕</button>
+                <div id="modal-body">
+                    <!-- JS로 동적 생성 -->
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 로딩 스피너 -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>최적의 여행지를 찾는 중...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
+<!-- Kakao Map SDK -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=105967ef10e133551af4dd7da860dbb9&libraries=services"></script>
